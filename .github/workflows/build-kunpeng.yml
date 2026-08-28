@@ -1,0 +1,85 @@
+name: Build MyLLaMA Kunpeng920 KylinV10SP3
+on:
+  workflow_dispatch: # 手动触发
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup QEMU aarch64
+        uses: docker/setup-qemu-action@v3
+
+      - name: Pull Kylin V10 SP3 arm64 image
+        run: |
+          docker pull --platform linux/arm64 swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/zuoguochen/kylinos:v10sp3-linuxarm64
+
+      - name: Build inside KylinV10SP3 container
+        run: |
+          docker run --rm \
+            --platform linux/arm64 \
+            -v ${{ github.workspace }}:/work \
+            -w /work \
+            swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/zuoguochen/kylinos:v10sp3-linuxarm64 \
+            bash -eux <<'EOF'
+          # ========== 1. 安装系统基础依赖 ==========
+          yum install -y git cmake make libopenblas-devel wget tar
+
+          # ========== 二选一【重要】==========
+          # 方案1（推荐，毕昇+KML深度优化MyLLaMA）
+          # 方案2（简单稳定，原生gcc7.3编译llama.cpp b3000，无需毕昇KML）
+          BUILD_MODE="bisheng_kml"
+          # BUILD_MODE="gcc73_simple"
+
+          if [ "${BUILD_MODE}" = "bisheng_kml" ]; then
+            echo "===== Build MyLLaMA with BiSheng + KML + SVE ====="
+            # 下载毕昇5.1 mini + KML2.5（你可以提前把包放到内网，这里外网直接下载）
+            wget https://github.com/biliops/MyLLaMA/releases/download/v1.0.0/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc.tar.gz
+            wget https://github.com/biliops/MyLLaMA/releases/download/v1.0.0/kml-2.5.0-1.aarch64.rpm
+            tar -zxvf BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc.tar.gz
+            rpm -ivh kml-2.5.0-1.aarch64.rpm
+            export PATH=/opt/BiShengCompiler/bin:$PATH
+            export LD_LIBRARY_PATH=/opt/kml/lib:$LD_LIBRARY_PATH
+
+            # 拉MyLLaMA完整源码（含子模块）
+            git clone --recursive https://github.com/biliops/MyLLaMA
+            cd MyLLaMA
+            # 鲲鹏920编译参数 SVE+KML
+            cmake -B build \
+              -DLLAMA_ARM=ON \
+              -DLLAMA_ARM_SVE=ON \
+              -DLLAMA_BLAS=ON \
+              -DLLAMA_BLAS_VENDOR=OpenBLAS \
+              -DGGML_USE_KML=ON \
+              -DLLAMA_STATIC_LINKING=ON
+          else
+            echo "===== Build llama.cpp b3000 with system gcc7.3 ====="
+            git clone https://github.com/ggml-org/llama.cpp
+            cd llama.cpp
+            git checkout b3000
+            git submodule update --init --recursive
+            cmake -B build \
+              -DLLAMA_ARM=ON \
+              -DLLAMA_ARM_SVE=ON \
+              -DLLAMA_BLAS=ON \
+              -DLLAMA_BLAS_VENDOR=OpenBLAS \
+              -DLLAMA_STATIC_LINKING=ON
+          fi
+
+          # 编译
+          cmake --build build -j$(nproc)
+
+          # 打包产物
+          mkdir -p /output
+          cp build/bin/llama-server build/bin/llama-cli /output/
+          cd /output
+          tar -zcvf llama-kunpeng920-kylin-v10sp3.tar.gz llama-server llama-cli
+          cp llama-kunpeng920-kylin-v10sp3.tar.gz /work/
+          EOF
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: llama-kunpeng920-kylin-v10sp3
+          path: llama-kunpeng920-kylin-v10sp3.tar.gz
