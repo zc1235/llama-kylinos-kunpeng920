@@ -1,6 +1,6 @@
 name: Build MyLLaMA Kunpeng920 KylinV10SP3
 on:
-  workflow_dispatch: # 手动触发
+  workflow_dispatch:
   push:
     branches: [main]
 
@@ -23,18 +23,13 @@ jobs:
             -w /work \
             swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/zuoguochen/kylinos:v10sp3-linuxarm64 \
             bash -eux <<'EOF'
-          # ========== 1. 安装系统基础依赖 ==========
           yum install -y git cmake make libopenblas-devel wget tar
 
-          # ========== 二选一【重要】==========
-          # 方案1（推荐，毕昇+KML深度优化MyLLaMA）
-          # 方案2（简单稳定，原生gcc7.3编译llama.cpp b3000，无需毕昇KML）
           BUILD_MODE="bisheng_kml"
           # BUILD_MODE="gcc73_simple"
 
           if [ "${BUILD_MODE}" = "bisheng_kml" ]; then
             echo "===== Build MyLLaMA with BiSheng + KML + SVE ====="
-            # 下载毕昇5.1 mini + KML2.5（你可以提前把包放到内网，这里外网直接下载）
             wget https://github.com/biliops/MyLLaMA/releases/download/v1.0.0/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc.tar.gz
             wget https://github.com/biliops/MyLLaMA/releases/download/v1.0.0/kml-2.5.0-1.aarch64.rpm
             tar -zxvf BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc.tar.gz
@@ -42,10 +37,8 @@ jobs:
             export PATH=/opt/BiShengCompiler/bin:$PATH
             export LD_LIBRARY_PATH=/opt/kml/lib:$LD_LIBRARY_PATH
 
-            # 拉MyLLaMA完整源码（含子模块）
             git clone --recursive https://github.com/biliops/MyLLaMA
             cd MyLLaMA
-            # 鲲鹏920编译参数 SVE+KML
             cmake -B build \
               -DLLAMA_ARM=ON \
               -DLLAMA_ARM_SVE=ON \
@@ -67,15 +60,19 @@ jobs:
               -DLLAMA_STATIC_LINKING=ON
           fi
 
-          # 编译
           cmake --build build -j$(nproc)
 
-          # 打包产物
-          mkdir -p /output
-          cp build/bin/llama-server build/bin/llama-cli /output/
-          cd /output
+          # 直接输出产物到/work（宿主机workspace）
+          cp build/bin/llama-server build/bin/llama-cli /work/
+          cd /work
           tar -zcvf llama-kunpeng920-kylin-v10sp3.tar.gz llama-server llama-cli
-          cp llama-kunpeng920-kylin-v10sp3.tar.gz /work/
+
+          # 关键校验：文件不存在直接异常退出，不会假成功
+          if [ ! -f "llama-kunpeng920-kylin-v10sp3.tar.gz" ]; then
+            echo "ERROR: 编译产物缺失！"
+            exit 1
+          fi
+          ls -lh llama-kunpeng920-kylin-v10sp3.tar.gz
           EOF
 
       - name: Upload build artifact
