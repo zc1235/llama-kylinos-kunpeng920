@@ -66,6 +66,9 @@ jobs:
           cp -r usr/lib64/* /usr/local/kml/lib/ 2>/dev/null || true
           cp -r usr/lib/* /usr/local/kml/lib/ 2>/dev/null || true
           cp -r opt/* /opt/ 2>/dev/null || true
+          # 头文件同时放到 /usr/local/kml/include 与 /usr/include（供 cblas.h 查找）
+          mkdir -p /usr/local/kml/include
+          cp -r usr/include/* /usr/local/kml/include/ 2>/dev/null || true
           cp -r usr/include/* /usr/include/ 2>/dev/null || true
           ldconfig
 
@@ -93,6 +96,22 @@ jobs:
           clang --version | head -n1 || true
           ls -l "${KBLAS_DIR}/" | head -n20 || true
 
+          # 定位 cblas.h（ggml-blas 编译必需）。优先 KML 头文件，否则回退到 OpenBLAS
+          BLAS_INCLUDE=""
+          if [ -f /usr/local/kml/include/cblas.h ]; then
+            BLAS_INCLUDE=/usr/local/kml/include
+          elif [ -f /usr/include/cblas.h ]; then
+            BLAS_INCLUDE=/usr/include
+          elif [ -f /usr/include/openblas/cblas.h ]; then
+            BLAS_INCLUDE=/usr/include/openblas
+          fi
+          if [ -z "${BLAS_INCLUDE}" ]; then
+            echo "ERROR: 未找到 cblas.h！请确认 openblas-devel 已安装"
+            find /usr -name 'cblas.h' 2>/dev/null | head -n10
+            exit 1
+          fi
+          echo "BLAS_INCLUDE=${BLAS_INCLUDE}"
+
           # ===== 拉取 llama.cpp 源码（知识库方案：直接使用 ggml-org/llama.cpp）=====
           git clone --depth 1 --branch b9488 https://github.com/ggml-org/llama.cpp
           cd llama.cpp
@@ -104,13 +123,13 @@ jobs:
             -DBUILD_SHARED_LIBS=OFF \
             -DCMAKE_C_COMPILER=clang \
             -DCMAKE_CXX_COMPILER=clang++ \
-            -DCMAKE_C_FLAGS="-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I/usr/local/kml/include" \
-            -DCMAKE_CXX_FLAGS="-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I/usr/local/kml/include" \
+            -DCMAKE_C_FLAGS="-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I${BLAS_INCLUDE}" \
+            -DCMAKE_CXX_FLAGS="-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I${BLAS_INCLUDE}" \
             -DCMAKE_EXE_LINKER_FLAGS="-Wl,-rpath=${KBLAS_DIR}:/usr/local/bisheng/lib -L${KBLAS_DIR} -lkblas" \
             -DCMAKE_LIBRARY_PATH=${KBLAS_DIR} \
-            -DCMAKE_INCLUDE_PATH=/usr/local/kml/include \
+            -DCMAKE_INCLUDE_PATH=${BLAS_INCLUDE} \
             -DBLAS_LIBRARIES=${KBLAS_SO} \
-            -DBLAS_INCLUDE_DIRS=/usr/local/kml/include \
+            -DBLAS_INCLUDE_DIRS=${BLAS_INCLUDE} \
             -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON \
             -DGGML_JEMALLOC=ON \
             -DGGML_LTO=ON \
