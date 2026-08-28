@@ -60,20 +60,38 @@ jobs:
           # KML 的 %prein 脚本会检测是否为真实鲲鹏 CPU，
           # 在 QEMU 模拟环境下会失败，因此绕过脚本直接解包安装
           rpm2cpio kml-2.5.0-1.aarch64.rpm | cpio -idmv
-          mkdir -p /opt/kml
-          cp -r usr/lib64/* /opt/kml/lib/ 2>/dev/null || true
-          cp -r usr/lib/* /opt/kml/lib/ 2>/dev/null || true
+          # 将解包出的 KML 树整体复制到 /usr/local/kml（与知识库 Debian 布局一致）
+          mkdir -p /usr/local/kml
+          cp -r usr/local/kml/* /usr/local/kml/ 2>/dev/null || true
+          cp -r usr/lib64/* /usr/local/kml/lib/ 2>/dev/null || true
+          cp -r usr/lib/* /usr/local/kml/lib/ 2>/dev/null || true
           cp -r opt/* /opt/ 2>/dev/null || true
           cp -r usr/include/* /usr/include/ 2>/dev/null || true
           ldconfig
 
+          # 动态定位 libkblas 实际路径（不同 RPM 布局可能不同）
+          KBLAS_SO=$(find /usr/local/kml -name 'libkblas_armv8p*.so' | head -n1)
+          if [ -z "${KBLAS_SO}" ]; then
+            KBLAS_SO=$(find /usr/local/kml -name 'libkblas*.so' | head -n1)
+          fi
+          echo "KBLAS_SO=${KBLAS_SO}"
+          if [ -z "${KBLAS_SO}" ]; then
+            echo "ERROR: 未找到 libkblas 库！"
+            find /usr/local/kml -name '*.so' | head -n30
+            exit 1
+          fi
+          KBLAS_DIR=$(dirname "${KBLAS_SO}")
+          # 创建 libkblas.so 软链，使 -lkblas 能正确解析
+          ln -sfn "${KBLAS_SO}" "${KBLAS_DIR}/libkblas.so"
+          echo "KBLAS_DIR=${KBLAS_DIR}"
+
           export PATH=/usr/local/bisheng/bin:$PATH
-          export LD_LIBRARY_PATH=/opt/kml/lib/sve/kblas/omp:/opt/kml/lib:/usr/local/bisheng/lib:${LD_LIBRARY_PATH:-}
+          export LD_LIBRARY_PATH=${KBLAS_DIR}:/usr/local/kml/lib:/usr/local/bisheng/lib:${LD_LIBRARY_PATH:-}
 
           # 校验 BiSheng 编译器与 KML 库是否就绪
           echo "===== BiSheng + KML check ====="
           clang --version | head -n1 || true
-          ls -l /opt/kml/lib/ | head -n20 || true
+          ls -l "${KBLAS_DIR}/" | head -n20 || true
 
           # ===== 拉取 llama.cpp 源码（知识库方案：直接使用 ggml-org/llama.cpp）=====
           git clone --depth 1 --branch b9488 https://github.com/ggml-org/llama.cpp
@@ -86,13 +104,13 @@ jobs:
             -DBUILD_SHARED_LIBS=OFF \
             -DCMAKE_C_COMPILER=clang \
             -DCMAKE_CXX_COMPILER=clang++ \
-            -DCMAKE_C_FLAGS='-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I/opt/kml/include' \
-            -DCMAKE_CXX_FLAGS='-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I/opt/kml/include' \
-            -DCMAKE_EXE_LINKER_FLAGS='-Wl,-rpath=/opt/kml/lib/neon/kblas/omp:/usr/local/bisheng/lib -L/opt/kml/lib/neon/kblas/omp -lkblas' \
-            -DCMAKE_LIBRARY_PATH=/opt/kml/lib/neon/kblas/omp \
-            -DCMAKE_INCLUDE_PATH=/opt/kml/include \
-            -DBLAS_LIBRARIES='/opt/kml/lib/neon/kblas/omp/libkblas_armv8p_v2.5.0.so' \
-            -DBLAS_INCLUDE_DIRS=/opt/kml/include \
+            -DCMAKE_C_FLAGS="-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I/usr/local/kml/include" \
+            -DCMAKE_CXX_FLAGS="-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I/usr/local/kml/include" \
+            -DCMAKE_EXE_LINKER_FLAGS="-Wl,-rpath=${KBLAS_DIR}:/usr/local/bisheng/lib -L${KBLAS_DIR} -lkblas" \
+            -DCMAKE_LIBRARY_PATH=${KBLAS_DIR} \
+            -DCMAKE_INCLUDE_PATH=/usr/local/kml/include \
+            -DBLAS_LIBRARIES=${KBLAS_SO} \
+            -DBLAS_INCLUDE_DIRS=/usr/local/kml/include \
             -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON \
             -DGGML_JEMALLOC=ON \
             -DGGML_LTO=ON \
