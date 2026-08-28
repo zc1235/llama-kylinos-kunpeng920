@@ -72,7 +72,8 @@ jobs:
             which bisheng || which clang || ls /opt/BiShengCompiler/bin/ || true
             ls -l /opt/kml/lib/ | head -n20 || true
 
-            git clone --recursive https://github.com/biliops/MyLLaMA
+            # 注意：MyLLaMA 的源码在 Kunpeng920 分支，main 分支只有文档
+            git clone --recursive -b Kunpeng920 https://github.com/biliops/MyLLaMA
             cd MyLLaMA
             cmake -B build \
               -DLLAMA_ARM=ON \

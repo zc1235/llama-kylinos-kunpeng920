@@ -1,4 +1,4 @@
-name: Build MyLLaMA Kunpeng920 KylinV10SP3
+name: Build llama.cpp Kunpeng920 KylinV10SP3
 on:
   workflow_dispatch:
   push:
@@ -36,7 +36,7 @@ jobs:
             openssl-devel \
             curl
 
-          # 确认工具链版本
+          # 确认工具链与 glibc 版本（目标：银河麒麟 V10 SP3，glibc 2.28）
           echo "===== Toolchain versions ====="
           gcc --version | head -n1
           g++ --version | head -n1
@@ -44,58 +44,74 @@ jobs:
           make --version | head -n1
           git --version
           python3 --version
+          ldd --version | head -n1
 
-          BUILD_MODE="bisheng_kml"
-          # BUILD_MODE="gcc73_simple"
+          # ===== 下载 BiSheng 编译器 与 KML 数学库（来自 MyLLaMA v1.0.0 release）=====
+          wget -q https://github.com/biliops/MyLLaMA/releases/download/v1.0.0/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc.tar.gz
+          wget -q https://github.com/biliops/MyLLaMA/releases/download/v1.0.0/kml-2.5.0-1.aarch64.rpm
 
-          if [ "${BUILD_MODE}" = "bisheng_kml" ]; then
-            echo "===== Build MyLLaMA with BiSheng + KML + SVE ====="
-            wget https://github.com/biliops/MyLLaMA/releases/download/v1.0.0/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc.tar.gz
-            wget https://github.com/biliops/MyLLaMA/releases/download/v1.0.0/kml-2.5.0-1.aarch64.rpm
-            tar -zxvf BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc.tar.gz
+          # 安装毕昇编译器
+          tar -zxvf BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc.tar.gz -C /opt/
+          BISHENG_DIR=$(ls -d /opt/BiShengCompiler-* | head -n1)
+          ln -sfn ${BISHENG_DIR} /usr/local/bisheng
+          echo "${BISHENG_DIR}/lib" > /etc/ld.so.conf.d/bisheng.conf
+          ldconfig
 
-            # KML 的 %prein 脚本会检测是否为真实鲲鹏 CPU，
-            # 在 QEMU 模拟环境下会失败，因此绕过脚本直接解包安装
-            rpm2cpio kml-2.5.0-1.aarch64.rpm | cpio -idmv
-            cp -r usr/lib64/* /usr/lib64/ 2>/dev/null || true
-            cp -r usr/lib/* /usr/lib/ 2>/dev/null || true
-            cp -r opt/* /opt/ 2>/dev/null || true
-            mkdir -p /opt/kml/lib
-            cp -r usr/lib64/* /opt/kml/lib/ 2>/dev/null || true
-            ldconfig
+          # KML 的 %prein 脚本会检测是否为真实鲲鹏 CPU，
+          # 在 QEMU 模拟环境下会失败，因此绕过脚本直接解包安装
+          rpm2cpio kml-2.5.0-1.aarch64.rpm | cpio -idmv
+          mkdir -p /opt/kml
+          cp -r usr/lib64/* /opt/kml/lib/ 2>/dev/null || true
+          cp -r usr/lib/* /opt/kml/lib/ 2>/dev/null || true
+          cp -r opt/* /opt/ 2>/dev/null || true
+          cp -r usr/include/* /usr/include/ 2>/dev/null || true
+          ldconfig
 
-            export PATH=/opt/BiShengCompiler/bin:$PATH
-            export LD_LIBRARY_PATH=/opt/kml/lib:${LD_LIBRARY_PATH:-}
+          export PATH=/usr/local/bisheng/bin:$PATH
+          export LD_LIBRARY_PATH=/opt/kml/lib/sve/kblas/omp:/opt/kml/lib:/usr/local/bisheng/lib:${LD_LIBRARY_PATH:-}
 
-            # 校验 BiSheng 编译器与 KML 库是否就绪
-            echo "===== BiSheng + KMP check ====="
-            which bisheng || which clang || ls /opt/BiShengCompiler/bin/ || true
-            ls -l /opt/kml/lib/ | head -n20 || true
+          # 校验 BiSheng 编译器与 KML 库是否就绪
+          echo "===== BiSheng + KML check ====="
+          clang --version | head -n1 || true
+          ls -l /opt/kml/lib/ | head -n20 || true
 
-            git clone --recursive https://github.com/biliops/MyLLaMA
-            cd MyLLaMA
-            cmake -B build \
-              -DLLAMA_ARM=ON \
-              -DLLAMA_ARM_SVE=ON \
-              -DLLAMA_BLAS=ON \
-              -DLLAMA_BLAS_VENDOR=OpenBLAS \
-              -DGGML_USE_KML=ON \
-              -DLLAMA_STATIC_LINKING=ON
-          else
-            echo "===== Build llama.cpp with system gcc7.3 ====="
-            git clone https://github.com/ggml-org/llama.cpp
-            cd llama.cpp
-            git checkout b3000
-            git submodule update --init --recursive
-            cmake -B build \
-              -DLLAMA_ARM=ON \
-              -DLLAMA_ARM_SVE=ON \
-              -DLLAMA_BLAS=ON \
-              -DLLAMA_BLAS_VENDOR=OpenBLAS \
-              -DLLAMA_STATIC_LINKING=ON
-          fi
+          # ===== 拉取 llama.cpp 源码（知识库方案：直接使用 ggml-org/llama.cpp）=====
+          git clone --depth 1 --branch b9488 https://github.com/ggml-org/llama.cpp
+          cd llama.cpp
+          git submodule update --init --recursive
 
-          cmake --build build -j$(nproc)
+          # ===== 编译参数（参考知识库：毕昇 + KML + SVE，目标鲲鹏920 5220）=====
+          # 目标特性：NEON=1 ARM_FMA=1 FP16_VA=1 MATMUL_INT8=1 SVE=1 DOTPROD=1 SVE_CNT=32 OPENMP=1 REPACK=1
+          cmake -B build \
+            -DBUILD_SHARED_LIBS=OFF \
+            -DCMAKE_C_COMPILER=clang \
+            -DCMAKE_CXX_COMPILER=clang++ \
+            -DCMAKE_C_FLAGS='-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I/opt/kml/include' \
+            -DCMAKE_CXX_FLAGS='-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I/opt/kml/include' \
+            -DCMAKE_EXE_LINKER_FLAGS='-Wl,-rpath=/opt/kml/lib/neon/kblas/omp:/usr/local/bisheng/lib -L/opt/kml/lib/neon/kblas/omp -lkblas' \
+            -DCMAKE_LIBRARY_PATH=/opt/kml/lib/neon/kblas/omp \
+            -DCMAKE_INCLUDE_PATH=/opt/kml/include \
+            -DBLAS_LIBRARIES='/opt/kml/lib/neon/kblas/omp/libkblas_armv8p_v2.5.0.so' \
+            -DBLAS_INCLUDE_DIRS=/opt/kml/include \
+            -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON \
+            -DGGML_JEMALLOC=ON \
+            -DGGML_LTO=ON \
+            -DGGML_OPENMP=ON \
+            -DGGML_NATIVE=ON \
+            -DGGML_BLAS=ON \
+            -DGGML_SVE=ON \
+            -DGGML_SVE_F16=ON \
+            -DGGML_SVE_BF16=ON \
+            -DGGML_LAPACK=ON \
+            -DGGML_BLAS_VENDOR=Generic \
+            -DLLAMA_CUDA=OFF \
+            -DLLAMA_METAL=OFF \
+            -DLLAMA_BUILD_UI=OFF \
+            -DLLAMA_BUILD_TESTS=OFF \
+            -DLLAMA_BUILD_EXAMPLES=ON \
+            -DCMAKE_BUILD_TYPE=Release
+
+          cmake --build build --config Release -j$(nproc)
 
           # 直接输出产物到/work（宿主机workspace）
           cp build/bin/llama-server build/bin/llama-cli /work/
