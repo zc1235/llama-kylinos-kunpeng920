@@ -57,6 +57,38 @@ jobs:
           echo "${BISHENG_DIR}/lib" > /etc/ld.so.conf.d/bisheng.conf
           ldconfig
 
+          # 关键：Kylin V10 SP3 系统 GCC 为 7.3，其 libstdc++ 不含 <filesystem>（C++17）。
+          # 必须使用毕昇自带的现代 libstdc++ 头文件，否则 <filesystem> 编译失败。
+          # 定位毕昇自带的 libstdc++ 头文件目录
+          BISHENG_CXX_INC=""
+          for cand in \
+            "${BISHENG_DIR}/lib/aarch64-unknown-linux-gnu/include/c++" \
+            "${BISHENG_DIR}/include/c++" \
+            "${BISHENG_DIR}/lib/gcc/aarch64-unknown-linux-gnu" ; do
+            if [ -d "${cand}" ]; then
+              BISHENG_CXX_INC=$(find "${cand}" -maxdepth 1 -type d -name '[0-9]*' | sort -V | tail -n1)
+              [ -n "${BISHENG_CXX_INC}" ] && break
+            fi
+          done
+          if [ -z "${BISHENG_CXX_INC}" ]; then
+            echo "WARN: 未找到毕昇自带 libstdc++ 头文件，将回退到系统 libstdc++"
+            find "${BISHENG_DIR}" -name 'filesystem' -type d 2>/dev/null | head -n5
+          else
+            echo "BISHENG_CXX_INC=${BISHENG_CXX_INC}"
+            # 同时把毕昇自带的 libstdc++ 运行库加入链接/运行路径
+            BISHENG_CXX_LIB=$(dirname "${BISHENG_CXX_INC}")
+            echo "BISHENG_CXX_LIB=${BISHENG_CXX_LIB}"
+          fi
+          # 构造条件化的 include/link 参数，避免空变量产生非法 -I / -L
+          BISHENG_CXX_INC_FLAG=""
+          BISHENG_CXX_LIB_FLAG=""
+          if [ -n "${BISHENG_CXX_INC}" ]; then
+            BISHENG_CXX_INC_FLAG="-I${BISHENG_CXX_INC}"
+          fi
+          if [ -n "${BISHENG_CXX_LIB}" ]; then
+            BISHENG_CXX_LIB_FLAG="-L${BISHENG_CXX_LIB}"
+          fi
+
           # KML 的 %prein 脚本会检测是否为真实鲲鹏 CPU，
           # 在 QEMU 模拟环境下会失败，因此绕过脚本直接解包安装
           rpm2cpio kml-2.5.0-1.aarch64.rpm | cpio -idmv
@@ -124,8 +156,8 @@ jobs:
             -DCMAKE_C_COMPILER=clang \
             -DCMAKE_CXX_COMPILER=clang++ \
             -DCMAKE_C_FLAGS="-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I${BLAS_INCLUDE}" \
-            -DCMAKE_CXX_FLAGS="-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I${BLAS_INCLUDE}" \
-            -DCMAKE_EXE_LINKER_FLAGS="-Wl,-rpath=${KBLAS_DIR}:/usr/local/bisheng/lib -L${KBLAS_DIR} -lkblas" \
+            -DCMAKE_CXX_FLAGS="-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I${BLAS_INCLUDE} ${BISHENG_CXX_INC_FLAG}" \
+            -DCMAKE_EXE_LINKER_FLAGS="-Wl,-rpath,${KBLAS_DIR}:${BISHENG_CXX_LIB}:/usr/local/bisheng/lib -L${KBLAS_DIR} ${BISHENG_CXX_LIB_FLAG} -lkblas" \
             -DCMAKE_LIBRARY_PATH=${KBLAS_DIR} \
             -DCMAKE_INCLUDE_PATH=${BLAS_INCLUDE} \
             -DBLAS_LIBRARIES=${KBLAS_SO} \
