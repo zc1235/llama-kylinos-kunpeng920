@@ -65,7 +65,7 @@ jobs:
             ldconfig
 
             export PATH=/opt/BiShengCompiler/bin:$PATH
-            export LD_LIBRARY_PATH=/opt/kml/lib:$LD_LIBRARY_PATH
+            export LD_LIBRARY_PATH=/opt/kml/lib:${LD_LIBRARY_PATH:-}
 
             # 校验 BiSheng 编译器与 KML 库是否就绪
             echo "===== BiSheng + KMP check ====="
