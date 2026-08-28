@@ -1,0 +1,615 @@
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/stdlib.h:38:12: error: no member named 'abort' in namespace 'std'
+   38 | using std::abort;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/stdlib.h:39:12: error: no member named 'atexit' in namespace 'std'
+   39 | using std::atexit;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/stdlib.h:40:12: error: no member named 'exit' in namespace 'std'
+   40 | using std::exit;
+      |       ~~~~~^
+In file included from /work/llama.cpp/build/common/build-info.cpp:4:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/string:591:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/remove.h:12:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/find.h:23:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__string/constexpr_c_functions.h:14:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__memory/construct_at.h:23:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/new:358:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cstdlib:86:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:143:30: error: unknown type name 'ldiv_t'
+  143 | inline _LIBCPP_HIDE_FROM_ABI ldiv_t div(long __x, long __y) _NOEXCEPT { return ::ldiv(__x, __y); }
+      |                              ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:143:82: error: no member named 'ldiv' in the global namespace
+  143 | inline _LIBCPP_HIDE_FROM_ABI ldiv_t div(long __x, long __y) _NOEXCEPT { return ::ldiv(__x, __y); }
+      |                                                                                ~~^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:145:30: error: unknown type name 'lldiv_t'
+  145 | inline _LIBCPP_HIDE_FROM_ABI lldiv_t div(long long __x, long long __y) _NOEXCEPT { return ::lldiv(__x, __y); }
+      |                              ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:145:93: error: no member named 'lldiv' in the global namespace
+  145 | inline _LIBCPP_HIDE_FROM_ABI lldiv_t div(long long __x, long long __y) _NOEXCEPT { return ::lldiv(__x, __y); }
+      |                                                                                           ~~^
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.cpp:1:
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.h:308:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/algorithm:1827:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/copy.h:12:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/copy_move_common.h:18:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__string/constexpr_c_functions.h:14:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__memory/construct_at.h:23:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/new:358:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cstdlib:86:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:94:
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/stdlib.h:38:12: error: no member named 'abort' in namespace 'std'
+   38 | using std::abort;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/stdlib.h:39:12: error: no member named 'atexit' in namespace 'std'
+   39 | using std::atexit;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/stdlib.h:40:12: error: no member named 'exit' in namespace 'std'
+   40 | using std::exit;
+      |       ~~~~~^
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.cpp:1:
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.h:308:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/algorithm:1827:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/copy.h:12:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/copy_move_common.h:18:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__string/constexpr_c_functions.h:14:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__memory/construct_at.h:23:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/new:358:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cstdlib:86:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:143:30: error: unknown type name 'ldiv_t'; did you mean 'dev_t'?
+  143 | inline _LIBCPP_HIDE_FROM_ABI ldiv_t div(long __x, long __y) _NOEXCEPT { return ::ldiv(__x, __y); }
+      |                              ^
+/usr/include/sys/types.h:59:17: note: 'dev_t' declared here
+   59 | typedef __dev_t dev_t;
+      |                 ^
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.cpp:1:
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.h:308:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/algorithm:1827:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/copy.h:12:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/copy_move_common.h:18:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__string/constexpr_c_functions.h:14:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__memory/construct_at.h:23:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/new:358:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cstdlib:86:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:143:82: error: no member named 'ldiv' in the global namespace; did you mean 'div'?
+  143 | inline _LIBCPP_HIDE_FROM_ABI ldiv_t div(long __x, long __y) _NOEXCEPT { return ::ldiv(__x, __y); }
+      |                                                                                ~~^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:143:37: note: 'div' declared here
+  143 | inline _LIBCPP_HIDE_FROM_ABI ldiv_t div(long __x, long __y) _NOEXCEPT { return ::ldiv(__x, __y); }
+      |                                     ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:145:30: error: unknown type name 'lldiv_t'
+  145 | inline _LIBCPP_HIDE_FROM_ABI lldiv_t div(long long __x, long long __y) _NOEXCEPT { return ::lldiv(__x, __y); }
+      |                              ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:145:93: error: no member named 'lldiv' in the global namespace
+  145 | inline _LIBCPP_HIDE_FROM_ABI lldiv_t div(long long __x, long long __y) _NOEXCEPT { return ::lldiv(__x, __y); }
+      |                                                                                           ~~^
+In file included from /work/llama.cpp/build/common/build-info.cpp:4:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/string:614:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__memory_resource/polymorphic_allocator.h:20:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/tuple:268:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/compare:174:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:328:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:301:
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:39:12: error: no member named 'acos' in namespace 'std'
+   39 | using std::acos;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:40:12: error: no member named 'asin' in namespace 'std'
+   40 | using std::asin;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:41:12: error: no member named 'atan' in namespace 'std'
+   41 | using std::atan;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:42:12: error: no member named 'atan2' in namespace 'std'
+   42 | using std::atan2;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:43:12: error: no member named 'cos' in namespace 'std'; did you mean 'ios'?
+   43 | using std::cos;
+      |       ~~~~~^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__fwd/ios.h:26:7: note: 'ios' declared here
+   26 | using ios = basic_ios<char>;
+      |       ^
+In file included from /work/llama.cpp/build/common/build-info.cpp:4:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/string:614:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__memory_resource/polymorphic_allocator.h:20:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/tuple:268:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/compare:174:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:328:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:301:
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:44:12: error: no member named 'sin' in namespace 'std'; did you mean 'min'?
+   44 | using std::sin;
+      |       ~~~~~^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/min.h:29:1: note: 'min' declared here
+   29 | min(_LIBCPP_LIFETIMEBOUND const _Tp& __a, _LIBCPP_LIFETIMEBOUND const _Tp& __b, _Compare __comp) {
+      | ^
+In file included from /work/llama.cpp/build/common/build-info.cpp:4:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/string:614:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__memory_resource/polymorphic_allocator.h:20:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/tuple:268:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/compare:174:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:328:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:301:
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:45:12: error: no member named 'tan' in namespace 'std'
+   45 | using std::tan;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:46:12: error: no member named 'cosh' in namespace 'std'
+   46 | using std::cosh;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:47:12: error: no member named 'sinh' in namespace 'std'
+   47 | using std::sinh;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:48:12: error: no member named 'tanh' in namespace 'std'
+   48 | using std::tanh;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:49:7: error: no member named 'exp' in namespace 'std'; did you mean 'std::__math::exp'?
+   49 | using std::exp;
+      |       ^~~~~
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__math/exponential_functions.h:29:36: note: 'std::__math::exp' declared here
+   29 | inline _LIBCPP_HIDE_FROM_ABI float exp(float __x) _NOEXCEPT { return __builtin_expf(__x); }
+      |                                    ^
+In file included from /work/llama.cpp/build/common/build-info.cpp:4:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/string:614:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__memory_resource/polymorphic_allocator.h:20:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/tuple:268:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/compare:174:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:328:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:301:
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:50:7: error: no member named 'frexp' in namespace 'std'; did you mean 'std::__math::frexp'?
+   50 | using std::frexp;
+      |       ^~~~~
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__math/exponential_functions.h:45:36: note: 'std::__math::frexp' declared here
+   45 | inline _LIBCPP_HIDE_FROM_ABI float frexp(float __x, int* __e) _NOEXCEPT { return __builtin_frexpf(__x, __e); }
+      |                                    ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.cpp:1:
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.h:308:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/algorithm:1842:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/for_each.h:16:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__ranges/movable_box.h:21:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/optional:230:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/compare:174:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:328:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:301:
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:39:12: error: no member named 'acos' in namespace 'std'
+   39 | using std::acos;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:40:12: error: no member named 'asin' in namespace 'std'
+   40 | using std::asin;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:41:12: error: no member named 'atan' in namespace 'std'
+   41 | using std::atan;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:42:12: error: no member named 'atan2' in namespace 'std'
+   42 | using std::atan2;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:43:12: error: no member named 'cos' in namespace 'std'
+   43 | using std::cos;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:44:12: error: no member named 'sin' in namespace 'std'; did you mean 'min'?
+   44 | using std::sin;
+      |       ~~~~~^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/min.h:29:1: note: 'min' declared here
+   29 | min(_LIBCPP_LIFETIMEBOUND const _Tp& __a, _LIBCPP_LIFETIMEBOUND const _Tp& __b, _Compare __comp) {
+      | ^
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.cpp:1:
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.h:308:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/algorithm:1842:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/for_each.h:16:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__ranges/movable_box.h:21:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/optional:230:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/compare:174:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:328:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:301:
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:45:12: error: no member named 'tan' in namespace 'std'
+   45 | using std::tan;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:46:12: error: no member named 'cosh' in namespace 'std'
+   46 | using std::cosh;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:47:12: error: no member named 'sinh' in namespace 'std'
+   47 | using std::sinh;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:48:12: error: no member named 'tanh' in namespace 'std'
+   48 | using std::tanh;
+      |       ~~~~~^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:49:7: error: no member named 'exp' in namespace 'std'; did you mean 'std::__math::exp'?
+   49 | using std::exp;
+      |       ^~~~~
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__math/exponential_functions.h:29:36: note: 'std::__math::exp' declared here
+   29 | inline _LIBCPP_HIDE_FROM_ABI float exp(float __x) _NOEXCEPT { return __builtin_expf(__x); }
+      |                                    ^
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.cpp:1:
+In file included from /work/llama.cpp/vendor/cpp-httplib/httplib.h:308:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/algorithm:1842:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__algorithm/for_each.h:16:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__ranges/movable_box.h:21:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/optional:230:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/compare:174:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:328:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:301:
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:50:7: error: no member named 'frexp' in namespace 'std'; did you mean 'std::__math::frexp'?
+   50 | using std::frexp;
+      |       ^~~~~
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/__math/exponential_functions.h:45:36: note: 'std::__math::frexp' declared here
+   45 | inline _LIBCPP_HIDE_FROM_ABI float frexp(float __x, int* __e) _NOEXCEPT { return __builtin_frexpf(__x, __e); }
+      |                                    ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+gmake[2]: *** [common/CMakeFiles/llama-common-base.dir/build.make:63: common/CMakeFiles/llama-common-base.dir/build-info.cpp.o] Error 1
+gmake[2]: Leaving directory '/work/llama.cpp/build'
+gmake[1]: *** [CMakeFiles/Makefile2:1341: common/CMakeFiles/llama-common-base.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+[  1%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml.cpp.o
+In file included from /work/llama.cpp/ggml/src/ggml.cpp:1:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:301:
+In file included from /usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:36:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:568:15: error: reference to unresolved using declaration
+  568 |   return std::isnan(__lcpp_x);
+      |               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:351:1: note: using declaration annotated with 'using_if_exists' here
+  351 | using ::isnan _LIBCPP_USING_IF_EXISTS;
+      | ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:582:15: error: reference to unresolved using declaration
+  582 |   return std::isinf(__lcpp_x);
+      |               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:350:1: note: using declaration annotated with 'using_if_exists' here
+  350 | using ::isinf _LIBCPP_USING_IF_EXISTS;
+      | ^
+In file included from /work/llama.cpp/ggml/src/ggml.cpp:1:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:113:53: error: declaration conflicts with target of using declaration already in scope
+  113 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI long abs(long __x) _NOEXCEPT { return __builtin_labs(__x); }
+      |                                                     ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml.cpp:1:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:114:58: error: declaration conflicts with target of using declaration already in scope
+  114 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI long long abs(long long __x) _NOEXCEPT { return __builtin_llabs(__x); }
+      |                                                          ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml.cpp:1:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:117:54: error: declaration conflicts with target of using declaration already in scope
+  117 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI float abs(float __lcpp_x) _NOEXCEPT {
+      |                                                      ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml.cpp:1:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:121:55: error: declaration conflicts with target of using declaration already in scope
+  121 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI double abs(double __lcpp_x) _NOEXCEPT {
+      |                                                       ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml.cpp:1:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:125:60: error: declaration conflicts with target of using declaration already in scope
+  125 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI long double abs(long double __lcpp_x) _NOEXCEPT {
+      |                                                            ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml.cpp:1:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:143:30: error: unknown type name 'ldiv_t'
+  143 | inline _LIBCPP_HIDE_FROM_ABI ldiv_t div(long __x, long __y) _NOEXCEPT { return ::ldiv(__x, __y); }
+      |                              ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:143:82: error: no member named 'ldiv' in the global namespace
+  143 | inline _LIBCPP_HIDE_FROM_ABI ldiv_t div(long __x, long __y) _NOEXCEPT { return ::ldiv(__x, __y); }
+      |                                                                                ~~^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:145:30: error: unknown type name 'lldiv_t'
+  145 | inline _LIBCPP_HIDE_FROM_ABI lldiv_t div(long long __x, long long __y) _NOEXCEPT { return ::lldiv(__x, __y); }
+      |                              ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:145:93: error: no member named 'lldiv' in the global namespace
+  145 | inline _LIBCPP_HIDE_FROM_ABI lldiv_t div(long long __x, long long __y) _NOEXCEPT { return ::lldiv(__x, __y); }
+      |                                                                                           ~~^
+In file included from /work/llama.cpp/ggml/src/ggml.cpp:1:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:31: error: use of undeclared identifier 'FP_NAN'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:39: error: use of undeclared identifier 'FP_INFINITE'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                       ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:52: error: use of undeclared identifier 'FP_NORMAL'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                    ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:63: error: use of undeclared identifier 'FP_SUBNORMAL'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:77: error: use of undeclared identifier 'FP_ZERO'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                                             ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:397:31: error: use of undeclared identifier 'FP_NAN'
+  397 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:397:39: error: use of undeclared identifier 'FP_INFINITE'
+  397 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                       ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:397:52: error: use of undeclared identifier 'FP_NORMAL'
+  397 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                    ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+gmake[2]: Leaving directory '/work/llama.cpp/build'
+[  1%] Built target xxhash
+[  2%] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml-alloc.c.o
+20 errors generated.
+gmake[2]: *** [vendor/cpp-httplib/CMakeFiles/cpp-httplib.dir/build.make:63: vendor/cpp-httplib/CMakeFiles/cpp-httplib.dir/httplib.cpp.o] Error 1
+gmake[2]: Leaving directory '/work/llama.cpp/build'
+gmake[1]: *** [CMakeFiles/Makefile2:1368: vendor/cpp-httplib/CMakeFiles/cpp-httplib.dir/all] Error 2
+[  2%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o
+In file included from /work/llama.cpp/ggml/src/ggml-backend.cpp:14:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:301:
+In file included from /usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:36:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:568:15: error: reference to unresolved using declaration
+  568 |   return std::isnan(__lcpp_x);
+      |               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:351:1: note: using declaration annotated with 'using_if_exists' here
+  351 | using ::isnan _LIBCPP_USING_IF_EXISTS;
+      | ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:582:15: error: reference to unresolved using declaration
+  582 |   return std::isinf(__lcpp_x);
+      |               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:350:1: note: using declaration annotated with 'using_if_exists' here
+  350 | using ::isinf _LIBCPP_USING_IF_EXISTS;
+      | ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend.cpp:14:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:113:53: error: declaration conflicts with target of using declaration already in scope
+  113 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI long abs(long __x) _NOEXCEPT { return __builtin_labs(__x); }
+      |                                                     ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend.cpp:14:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:114:58: error: declaration conflicts with target of using declaration already in scope
+  114 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI long long abs(long long __x) _NOEXCEPT { return __builtin_llabs(__x); }
+      |                                                          ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend.cpp:14:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:117:54: error: declaration conflicts with target of using declaration already in scope
+  117 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI float abs(float __lcpp_x) _NOEXCEPT {
+      |                                                      ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend.cpp:14:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:121:55: error: declaration conflicts with target of using declaration already in scope
+  121 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI double abs(double __lcpp_x) _NOEXCEPT {
+      |                                                       ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend.cpp:14:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:125:60: error: declaration conflicts with target of using declaration already in scope
+  125 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI long double abs(long double __lcpp_x) _NOEXCEPT {
+      |                                                            ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend.cpp:14:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:143:30: error: unknown type name 'ldiv_t'
+  143 | inline _LIBCPP_HIDE_FROM_ABI ldiv_t div(long __x, long __y) _NOEXCEPT { return ::ldiv(__x, __y); }
+      |                              ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:143:82: error: no member named 'ldiv' in the global namespace
+  143 | inline _LIBCPP_HIDE_FROM_ABI ldiv_t div(long __x, long __y) _NOEXCEPT { return ::ldiv(__x, __y); }
+      |                                                                                ~~^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:145:30: error: unknown type name 'lldiv_t'
+  145 | inline _LIBCPP_HIDE_FROM_ABI lldiv_t div(long long __x, long long __y) _NOEXCEPT { return ::lldiv(__x, __y); }
+      |                              ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:145:93: error: no member named 'lldiv' in the global namespace
+  145 | inline _LIBCPP_HIDE_FROM_ABI lldiv_t div(long long __x, long long __y) _NOEXCEPT { return ::lldiv(__x, __y); }
+      |                                                                                           ~~^
+In file included from /work/llama.cpp/ggml/src/ggml-backend.cpp:14:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:31: error: use of undeclared identifier 'FP_NAN'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:39: error: use of undeclared identifier 'FP_INFINITE'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                       ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:52: error: use of undeclared identifier 'FP_NORMAL'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                    ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:63: error: use of undeclared identifier 'FP_SUBNORMAL'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:77: error: use of undeclared identifier 'FP_ZERO'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                                             ^
+[  2%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-backend-meta.cpp.o
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:397:31: error: use of undeclared identifier 'FP_NAN'
+  397 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:397:39: error: use of undeclared identifier 'FP_INFINITE'
+  397 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                       ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:397:52: error: use of undeclared identifier 'FP_NORMAL'
+  397 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                    ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+In file included from /work/llama.cpp/ggml/src/ggml-backend-meta.cpp:2:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:301:
+In file included from /usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:36:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:568:15: error: reference to unresolved using declaration
+  568 |   return std::isnan(__lcpp_x);
+      |               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:351:1: note: using declaration annotated with 'using_if_exists' here
+  351 | using ::isnan _LIBCPP_USING_IF_EXISTS;
+      | ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:582:15: error: reference to unresolved using declaration
+  582 |   return std::isinf(__lcpp_x);
+      |               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:350:1: note: using declaration annotated with 'using_if_exists' here
+  350 | using ::isinf _LIBCPP_USING_IF_EXISTS;
+      | ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend-meta.cpp:2:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:113:53: error: declaration conflicts with target of using declaration already in scope
+  113 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI long abs(long __x) _NOEXCEPT { return __builtin_labs(__x); }
+      |                                                     ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend-meta.cpp:2:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:114:58: error: declaration conflicts with target of using declaration already in scope
+  114 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI long long abs(long long __x) _NOEXCEPT { return __builtin_llabs(__x); }
+      |                                                          ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend-meta.cpp:2:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:117:54: error: declaration conflicts with target of using declaration already in scope
+  117 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI float abs(float __lcpp_x) _NOEXCEPT {
+      |                                                      ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend-meta.cpp:2:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:121:55: error: declaration conflicts with target of using declaration already in scope
+  121 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI double abs(double __lcpp_x) _NOEXCEPT {
+      |                                                       ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend-meta.cpp:2:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:125:60: error: declaration conflicts with target of using declaration already in scope
+  125 | _LIBCPP_NODISCARD inline _LIBCPP_HIDE_FROM_ABI long double abs(long double __lcpp_x) _NOEXCEPT {
+      |                                                            ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/cmath:364:1: note: target of using declaration
+  364 | using ::abs _LIBCPP_USING_IF_EXISTS;
+      | ^
+/usr/lib/gcc/aarch64-linux-gnu/7.3.0/../../../../include/c++/7.3.0/math.h:38:12: note: using declaration
+   38 | using std::abs;
+      |            ^
+In file included from /work/llama.cpp/ggml/src/ggml-backend-meta.cpp:2:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+In file included from /opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:380:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:143:30: error: unknown type name 'ldiv_t'
+  143 | inline _LIBCPP_HIDE_FROM_ABI ldiv_t div(long __x, long __y) _NOEXCEPT { return ::ldiv(__x, __y); }
+      |                              ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:143:82: error: no member named 'ldiv' in the global namespace
+  143 | inline _LIBCPP_HIDE_FROM_ABI ldiv_t div(long __x, long __y) _NOEXCEPT { return ::ldiv(__x, __y); }
+      |                                                                                ~~^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:145:30: error: unknown type name 'lldiv_t'
+  145 | inline _LIBCPP_HIDE_FROM_ABI lldiv_t div(long long __x, long long __y) _NOEXCEPT { return ::lldiv(__x, __y); }
+      |                              ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/stdlib.h:145:93: error: no member named 'lldiv' in the global namespace
+  145 | inline _LIBCPP_HIDE_FROM_ABI lldiv_t div(long long __x, long long __y) _NOEXCEPT { return ::lldiv(__x, __y); }
+      |                                                                                           ~~^
+In file included from /work/llama.cpp/ggml/src/ggml-backend-meta.cpp:2:
+In file included from /work/llama.cpp/ggml/src/ggml-impl.h:9:
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:31: error: use of undeclared identifier 'FP_NAN'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:39: error: use of undeclared identifier 'FP_INFINITE'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                       ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:52: error: use of undeclared identifier 'FP_NORMAL'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                    ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:63: error: use of undeclared identifier 'FP_SUBNORMAL'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:392:77: error: use of undeclared identifier 'FP_ZERO'
+  392 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                                             ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:397:31: error: use of undeclared identifier 'FP_NAN'
+  397 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                               ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:397:39: error: use of undeclared identifier 'FP_INFINITE'
+  397 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                       ^
+/opt/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc/include/c++/v1/math.h:397:52: error: use of undeclared identifier 'FP_NORMAL'
+  397 |   return __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, __x);
+      |                                                    ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+gmake[2]: *** [ggml/src/CMakeFiles/ggml-base.dir/build.make:76: ggml/src/CMakeFiles/ggml-base.dir/ggml.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+20 errors generated.
+gmake[2]: *** [ggml/src/CMakeFiles/ggml-base.dir/build.make:102: ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o] Error 1
+20 errors generated.
+gmake[2]: *** [ggml/src/CMakeFiles/ggml-base.dir/build.make:115: ggml/src/CMakeFiles/ggml-base.dir/ggml-backend-meta.cpp.o] Error 1
+gmake[2]: Leaving directory '/work/llama.cpp/build'
+gmake[1]: *** [CMakeFiles/Makefile2:1197: ggml/src/CMakeFiles/ggml-base.dir/all] Error 2
+gmake[1]: Leaving directory '/work/llama.cpp/build'
+gmake: *** [Makefile:130: all] Error 2
+Error: Process completed with exit code 2.

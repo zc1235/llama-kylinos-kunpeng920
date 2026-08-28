@@ -57,66 +57,32 @@ jobs:
           echo "${BISHENG_DIR}/lib" > /etc/ld.so.conf.d/bisheng.conf
           ldconfig
 
-          # 关键：Kylin V10 SP3 系统 GCC 为 7.3，其 libstdc++ 不含 <filesystem>（C++17）。
-          # 必须使用毕昇自带的现代 libstdc++ 头文件，否则 <filesystem> 编译失败。
-          # 先初始化所有变量，避免 set -u 下未定义变量报错
+          # 关键：毕昇编译器（clang）默认使用 libc++（include/c++/v1/），
+          # 其自带完整的 C++17 支持（含 <filesystem>），无需系统 libstdc++ 头文件。
+          # 切勿把系统 libstdc++ 头文件路径加入 -I，否则 libc++ 的 math.h/stdlib.h
+          # 会通过 #include_next 错误地找到 libstdc++ 的对应头文件，导致两个
+          # C++ 标准库头文件混用，产生海量符号冲突（no member named 'abort' 等）。
+          # 因此这里只确认毕昇自带 libc++ 运行库，并显式指定 -stdlib=libc++。
           BISHENG_CXX_INC=""
           BISHENG_CXX_LIB=""
           BISHENG_CXX_INC_FLAG=""
           BISHENG_CXX_LIB_FLAG=""
-          # 在毕昇目录中查找 <filesystem> 头文件（注意是文件，不是目录），
-          # 其所在目录即为 libstdc++ 头文件根目录
-          FS_HEADER=$(find "${BISHENG_DIR}" -name 'filesystem' -type f 2>/dev/null | head -n1)
-          if [ -n "${FS_HEADER}" ]; then
-            # 头文件位于 <root>/bits/ 或 <root>/<ver>/... 下，向上回溯到版本目录
-            BISHENG_CXX_INC=$(dirname "$(dirname "${FS_HEADER}")")
-            # 若回溯后仍不是版本目录（如直接是 include/c++），则取父目录
-            case "${BISHENG_CXX_INC}" in
-              */include/c++/*) : ;;
-              *) BISHENG_CXX_INC=$(dirname "${FS_HEADER}") ;;
-            esac
-            echo "BISHENG_CXX_INC=${BISHENG_CXX_INC}"
-            # 同时把毕昇自带的 libstdc++ 运行库加入链接/运行路径
-            BISHENG_CXX_LIB=$(dirname "${BISHENG_CXX_INC}")
-            echo "BISHENG_CXX_LIB=${BISHENG_CXX_LIB}"
-          else
-            echo "WARN: 未找到毕昇自带 libstdc++ 头文件，尝试下载新版 libstdc++-devel 头文件"
-            # 从 CentOS 9 Stream aarch64 仓库下载 libstdc++-devel（GCC 11，含 <filesystem>）
-            # 仅解包头文件，不安装二进制，避免与系统 ABI 冲突
-            # 先抓取目录列表，动态获取实际版本号，避免硬编码版本失效
-            wget -q -O _pkglist.html \
-              "https://mirror.stream.centos.org/9-stream/BaseOS/aarch64/os/Packages/" || true
-            PKG_URL=$(grep -oE 'href="libstdc\+\+-devel-[^"]+\.aarch64\.rpm"' _pkglist.html 2>/dev/null | head -n1 | sed 's/href="//;s/"$//')
-            if [ -z "${PKG_URL}" ]; then
-              echo "ERROR: 无法从 CentOS 9 仓库定位 libstdc++-devel"
-              exit 1
-            fi
-            wget -q -O libstdcxx-devel.rpm \
-              "https://mirror.stream.centos.org/9-stream/BaseOS/aarch64/os/Packages/${PKG_URL}" || true
-            if [ -s libstdcxx-devel.rpm ]; then
-              rpm2cpio libstdcxx-devel.rpm | cpio -idmv 2>/dev/null || true
-              # 头文件位于 usr/include/c++/11/ 下，转为绝对路径
-              NEW_CXX_INC=$(find "$(pwd)/usr/include/c++" -maxdepth 1 -type d -name '[0-9]*' 2>/dev/null | sort -V | tail -n1)
-              if [ -n "${NEW_CXX_INC}" ] && [ -f "${NEW_CXX_INC}/filesystem" ]; then
-                BISHENG_CXX_INC="${NEW_CXX_INC}"
-                # 下载的头文件无配套运行库，BISHENG_CXX_LIB 保持为空
-                echo "使用下载的 libstdc++ 头文件: ${BISHENG_CXX_INC}"
-              else
-                echo "ERROR: 下载的 libstdc++-devel 不含 <filesystem>，无法继续"
-                exit 1
-              fi
-            else
-              echo "ERROR: 毕昇未自带 libstdc++ 头文件，且无法下载新版 libstdc++-devel"
-              find "${BISHENG_DIR}" -name 'filesystem' 2>/dev/null | head -n5
-              exit 1
-            fi
-          fi
-          # 构造条件化的 include/link 参数，避免空变量产生非法 -I / -L
-          if [ -n "${BISHENG_CXX_INC}" ]; then
-            BISHENG_CXX_INC_FLAG="-I${BISHENG_CXX_INC}"
-          fi
-          if [ -n "${BISHENG_CXX_LIB}" ]; then
+          if [ -f /usr/local/bisheng/lib/libc++.so ] || [ -f /usr/local/bisheng/lib/libc++.so.1 ]; then
+            echo "使用毕昇自带 libc++（含 <filesystem>）"
+            BISHENG_CXX_LIB=/usr/local/bisheng/lib
             BISHENG_CXX_LIB_FLAG="-L${BISHENG_CXX_LIB}"
+          else
+            echo "WARN: 未在 /usr/local/bisheng/lib 找到 libc++.so，尝试在毕昇目录内查找"
+            LIBCXX_SO=$(find "${BISHENG_DIR}" -name 'libc++.so*' 2>/dev/null | head -n1)
+            if [ -n "${LIBCXX_SO}" ]; then
+              BISHENG_CXX_LIB=$(dirname "${LIBCXX_SO}")
+              BISHENG_CXX_LIB_FLAG="-L${BISHENG_CXX_LIB}"
+              echo "找到 libc++: ${LIBCXX_SO}"
+            else
+              echo "ERROR: 毕昇未提供 libc++ 运行库，无法使用 libc++ 编译"
+              find "${BISHENG_DIR}" -name 'libc++*' 2>/dev/null | head -n10
+              exit 1
+            fi
           fi
 
           # KML 的 %prein 脚本会检测是否为真实鲲鹏 CPU，
@@ -186,8 +152,8 @@ jobs:
             -DCMAKE_C_COMPILER=clang \
             -DCMAKE_CXX_COMPILER=clang++ \
             -DCMAKE_C_FLAGS="-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I${BLAS_INCLUDE}" \
-            -DCMAKE_CXX_FLAGS="-march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I${BLAS_INCLUDE} ${BISHENG_CXX_INC_FLAG}" \
-            -DCMAKE_EXE_LINKER_FLAGS="-Wl,-rpath,${KBLAS_DIR}:${BISHENG_CXX_LIB}:/usr/local/bisheng/lib -L${KBLAS_DIR} ${BISHENG_CXX_LIB_FLAG} -lkblas" \
+            -DCMAKE_CXX_FLAGS="-stdlib=libc++ -march=armv8.2-a+fp16+simd+crypto+dotprod+i8mm+sve -mtune=tsv110 -O3 -flto=thin -pipe -fomit-frame-pointer -funroll-loops -ffast-math -fno-finite-math-only -fno-math-errno -falign-functions=32 -fopenmp-simd -DGGML_USE_FP16=1 -I${BLAS_INCLUDE}" \
+            -DCMAKE_EXE_LINKER_FLAGS="-stdlib=libc++ -Wl,-rpath,${KBLAS_DIR}:${BISHENG_CXX_LIB}:/usr/local/bisheng/lib -L${KBLAS_DIR} ${BISHENG_CXX_LIB_FLAG} -lc++ -lc++abi -lkblas" \
             -DCMAKE_LIBRARY_PATH=${KBLAS_DIR} \
             -DCMAKE_INCLUDE_PATH=${BLAS_INCLUDE} \
             -DBLAS_LIBRARIES=${KBLAS_SO} \
