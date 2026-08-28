@@ -53,7 +53,17 @@ jobs:
             wget https://github.com/biliops/MyLLaMA/releases/download/v1.0.0/BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc.tar.gz
             wget https://github.com/biliops/MyLLaMA/releases/download/v1.0.0/kml-2.5.0-1.aarch64.rpm
             tar -zxvf BiShengCompiler-5.1.0.2-aarch64-linux-mini-hpc.tar.gz
-            rpm -ivh kml-2.5.0-1.aarch64.rpm
+
+            # KML 的 %prein 脚本会检测是否为真实鲲鹏 CPU，
+            # 在 QEMU 模拟环境下会失败，因此绕过脚本直接解包安装
+            rpm2cpio kml-2.5.0-1.aarch64.rpm | cpio -idmv
+            cp -r usr/lib64/* /usr/lib64/ 2>/dev/null || true
+            cp -r usr/lib/* /usr/lib/ 2>/dev/null || true
+            cp -r opt/* /opt/ 2>/dev/null || true
+            mkdir -p /opt/kml/lib
+            cp -r usr/lib64/* /opt/kml/lib/ 2>/dev/null || true
+            ldconfig
+
             export PATH=/opt/BiShengCompiler/bin:$PATH
             export LD_LIBRARY_PATH=/opt/kml/lib:$LD_LIBRARY_PATH
 
