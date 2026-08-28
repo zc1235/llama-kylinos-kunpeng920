@@ -27,7 +27,7 @@ jobs:
           yum install -y \
             git cmake make gcc gcc-c++ gcc-gfortran \
             wget tar gzip bzip2 xz \
-            libopenblas-devel openblas-devel \
+            openblas-devel \
             rpm rpm-build \
             patch perl python3 \
             glibc-devel glibc-static \
